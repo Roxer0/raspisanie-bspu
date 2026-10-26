@@ -1,0 +1,41 @@
+name: Обновление расписания
+
+on:
+  schedule:
+    # Каждые 3 часа. GitHub может запускать с задержкой — это нормально.
+    - cron: "17 */3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-schedule
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Получить файлы репозитория
+        uses: actions/checkout@v4
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Скачать расписание с сайта БГПУ
+        run: python tools/build_schedule.py
+
+      - name: Сохранить изменения
+        run: |
+          if git diff --quiet -- schedule.json; then
+            echo "Расписание не изменилось"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add schedule.json
+          git commit -m "Расписание: автообновление"
+          git push
