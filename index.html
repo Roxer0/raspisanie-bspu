@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#4b2acb">
+  <meta name="color-scheme" content="light dark">
+  <title>Расписание · 280624</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%236c4bf4'/%3E%3Cstop offset='1' stop-color='%234b2acb'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Ctext x='32' y='45' font-family='-apple-system,Segoe UI,sans-serif' font-size='36' font-weight='800' fill='white' text-anchor='middle'%3EБ%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+  <div class="app" id="app">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">Б</span>
+        <span class="brand-text">
+          <b>Расписание</b>
+          <small>БГПУ · группа 280624</small>
+        </span>
+      </div>
+      <button class="icon-btn" id="open-settings" type="button" aria-label="Настройки">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M4 7h9M18 7h2M4 17h2M11 17h9"/>
+          <circle cx="15.5" cy="7" r="2.2"/>
+          <circle cx="7.5" cy="17" r="2.2"/>
+        </svg>
+      </button>
+    </header>
+
+    <main id="screen" class="screen" aria-live="polite"></main>
+
+    <nav class="tabbar" aria-label="Экраны">
+      <button class="tab-btn" type="button" data-tab="today">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"/>
+        </svg>
+        <span>Сегодня</span>
+      </button>
+      <button class="tab-btn" type="button" data-tab="week">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <rect x="3.5" y="5" width="17" height="16" rx="3"/>
+          <path d="M3.5 10h17M8 3v4M16 3v4"/>
+        </svg>
+        <span>Неделя</span>
+      </button>
+    </nav>
+  </div>
+
+  <div class="sheet-overlay" id="sheet" hidden>
+    <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+      <div class="sheet-grip" aria-hidden="true"></div>
+      <h2 id="sheet-title">Настройки</h2>
+
+      <section class="field">
+        <div class="field-head">
+          <span>Подгруппа</span>
+          <small>на неё делятся лабораторные</small>
+        </div>
+        <div class="segmented" id="subgroup-seg" role="group" aria-label="Подгруппа">
+          <button type="button" data-subgroup="1">1-я</button>
+          <button type="button" data-subgroup="2">2-я</button>
+        </div>
+      </section>
+
+      <section class="field">
+        <div class="field-head"><span>Данные</span></div>
+        <div class="data-row">
+          <div class="data-info">
+            <b id="data-status">Проверяем…</b>
+            <span id="data-source">ttable.bspu.by</span>
+          </div>
+          <button class="btn small" type="button" id="refresh-btn">Обновить</button>
+        </div>
+        <p class="field-note" id="data-note" hidden></p>
+      </section>
+
+      <a class="btn ghost" id="site-link" href="https://ttable.bspu.by/timetable?groups=1241&amp;week=1&amp;all_week=1&amp;ttype=pairs" target="_blank" rel="noopener">
+        Открыть сайт БГПУ
+      </a>
+
+      <p class="fine">Расписание хранится на сайте БГПУ и обновляется здесь автоматически. Если пары поменяли только что — нажмите «Обновить».</p>
+
+      <button class="btn primary" type="button" id="close-sheet">Готово</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
