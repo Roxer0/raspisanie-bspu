@@ -1,6 +1,6 @@
 {
   "group": "280624",
-  "reference": "2026-11-09",
+  "reference": "2026-11-23",
   "referenceParity": 0,
   "weeks": {
     "odd": {
@@ -338,7 +338,7 @@
       ]
     }
   },
-  "updatedAt": "2026-11-15T09:46:17+03:00",
-  "checkedAt": "2026-11-15T09:46:17+03:00",
+  "updatedAt": "2026-11-16T01:57:04+03:00",
+  "checkedAt": "2026-11-16T01:57:04+03:00",
   "source": "https://ttable.bspu.by"
 }
